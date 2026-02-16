@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gestión de Tareas Seek
 
-## Getting Started
+Aplicación de gestión de tareas construida con Next.js.
 
-First, run the development server:
+## Empezando
+
+Sigue estas instrucciones para configurar y ejecutar el proyecto en tu máquina local.
+
+### Requisitos Previos
+
+Asegúrate de tener instalado [Node.js](https://nodejs.org/) en tu sistema.
+
+### Instalación
+
+1. Instala las dependencias del proyecto ejecutando:
+
+```bash
+npm install
+# o
+yarn install
+# o
+pnpm install
+```
+
+### Configuración de Variables de Entorno
+
+Para que la autenticación funcione correctamente, debes configurar las variables de entorno.
+
+1. Crea un archivo llamado `.env` en la raíz del proyecto (al mismo nivel que `package.json`).
+2. Copia y pega el siguiente contenido dentro del archivo `.env`:
+
+```env
+NEXTAUTH_SECRET=secret
+NEXTAUTH_URL=http://localhost:3000
+```
+
+> **Nota:** `NEXTAUTH_SECRET` se utiliza para firmar los tokens de sesión.
+
+### Ejecutar el Servidor de Desarrollo
+
+Una vez completada la configuración, inicia el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
+# o
 yarn dev
-# or
+# o
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Credenciales de Prueba
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Para acceder a la aplicación, utiliza las siguientes credenciales:
 
-## Learn More
+- **Usuario:** `admin`
+- **Contraseña:** `123456`
 
-To learn more about Next.js, take a look at the following resources:
+## Tecnologías Principales
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [Next.js](https://nextjs.org/) - Framework de React
+- [TypeScript](https://www.typescriptlang.org/) - Tipado estático
+- [NextAuth.js](https://next-auth.js.org/) - Autenticación
+- [Tailwind CSS](https://tailwindcss.com/) - Estilos
+- [Shadcn UI](https://ui.shadcn.com/) - Componentes de UI
+- [Zustand](https://zustand.docs.pmnd.rs/) - Gestión de estado
+- [React Hook Form](https://react-hook-form.com/) - Manejo de formularios
+- [Zod](https://zod.dev/) - Validación de esquemas
