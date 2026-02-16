@@ -1,6 +1,10 @@
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
+/**
+ * Configuración de NextAuth con autenticación por credenciales
+ * Usuario: admin, Contraseña: 123456
+ */
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
