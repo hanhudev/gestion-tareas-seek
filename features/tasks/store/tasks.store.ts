@@ -10,10 +10,23 @@ interface TasksState {
   deleteTask: (id: string) => Promise<void>
 }
 
+/**
+ * Store de tareas con optimistic updates
+ * Actualiza la UI inmediatamente y revierte en caso de error del servidor
+ */
+
 export const useTasksStore = create<TasksState>((set, get) => ({
   tasks: [],
   setTasks: (tasks) => set({ tasks }),
   
+  /**
+   * Agrega una nueva tarea con optimistic update
+   * Actualiza la UI inmediatamente creando una tarea temporal,
+   * luego la reemplaza con la respuesta del servidor
+   * 
+   * @param {CreateTaskInput} input - Datos de la nueva tarea
+   * @returns {Promise<void>}
+   */
   addTask: async (input) => {
     const tempId = Math.random().toString(36).substring(2, 9)
     const optimisticTask: Task = {
@@ -38,6 +51,13 @@ export const useTasksStore = create<TasksState>((set, get) => ({
     }
   },
 
+  /**
+   * Actualiza una tarea existente con optimistic update
+   * 
+   * @param {string} id - ID de la tarea a actualizar
+   * @param {UpdateTaskInput} input - Datos parciales a actualizar
+   * @returns {Promise<void>}
+   */
   updateTask: async (id, input) => {
     const currentTasks = get().tasks
     set(state => ({
@@ -54,6 +74,12 @@ export const useTasksStore = create<TasksState>((set, get) => ({
     }
   },
 
+  /**
+   * Elimina una tarea con optimistic update
+   * 
+   * @param {string} id - ID de la tarea a eliminar
+   * @returns {Promise<void>}
+   */
   deleteTask: async (id) => {
     const currentTasks = get().tasks
     set(state => ({
