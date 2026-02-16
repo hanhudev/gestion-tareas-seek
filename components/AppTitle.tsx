@@ -2,6 +2,7 @@
 
 import { memo } from "react"
 import { cn } from "@/lib/utils"
+import { APP_TITLE } from "@/lib/constants"
 
 interface AppTitleProps {
   className?: string
@@ -13,7 +14,7 @@ export const AppTitle = memo(function AppTitle({ className }: AppTitleProps) {
       "text-3xl font-bold bg-linear-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent",
       className
     )}>
-      Gestor de Tareas
+      {APP_TITLE}
     </h1>
   )
 })
