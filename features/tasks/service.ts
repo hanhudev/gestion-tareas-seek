@@ -1,7 +1,10 @@
 import { Task, CreateTaskInput, UpdateTaskInput } from "./types"
 
-// Mock de tareas
-let tasks: Task[] = [
+/**
+ * MOCK DATA
+ * Datos de prueba para desarrollo local
+ */
+const INITIAL_MOCK_TASKS: Task[] = [
   {
     id: "1",
     title: "Implementar Autenticación",
@@ -36,6 +39,13 @@ let tasks: Task[] = [
   },
 ]
 
+// Estado mutable para simular persistencia en memoria
+let tasks: Task[] = [...INITIAL_MOCK_TASKS]
+
+/**
+ * Servicio de tareas
+ * Actualmente usa datos mock en memoria
+ */
 export const taskService = {
   getTasks: async (): Promise<Task[]> => {
     await new Promise((resolve) => setTimeout(resolve, 500))
