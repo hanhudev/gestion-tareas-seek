@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Plus } from "lucide-react"
 import { TaskForm } from "./TaskForm"
 import { useTasksStore } from "../store/tasks.store"
+import { sortTasksByPriority } from "../utils"
 
 interface TaskDashboardProps {
   tasks: Task[]
@@ -32,14 +33,7 @@ export function TaskDashboard({ tasks: initialTasks }: TaskDashboardProps) {
 
   const handleOpenCreate = useCallback(() => setIsCreateOpen(true), [])
 
-  const sortedTasks = [...tasks].sort((a, b) => {
-    const priority = {
-      "in-progress": 1,
-      "pending": 2,
-      "completed": 3
-    }
-    return (priority[a.status] || 99) - (priority[b.status] || 99)
-  })
+  const sortedTasks = sortTasksByPriority(tasks)
 
   return (
     <div className="space-y-6">

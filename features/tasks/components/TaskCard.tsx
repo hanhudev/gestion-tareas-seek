@@ -13,6 +13,7 @@ import { Pencil, Trash2 } from "lucide-react"
 import { useTasksStore } from "../store/tasks.store"
 import { useState, memo } from "react"
 import { TaskForm } from "./TaskForm"
+import { getStatusColor, getStatusLabel } from "../utils"
 
 interface TaskCardProps {
   task: Task
@@ -31,25 +32,13 @@ export const TaskCard = memo(function TaskCard({ task }: TaskCardProps) {
     }
   }
 
-  const statusColors = {
-    pending: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-100",
-    "in-progress": "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100",
-    completed: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100",
-  }
-
-  const statusLabels = {
-    pending: "Pendiente",
-    "in-progress": "En Progreso",
-    completed: "Completada",
-  }
-
   return (
     <>
       <Card>
         <CardHeader className="flex flex-col sm:flex-row justify-between space-y-0 pb-2">
           <CardTitle className="text-lg font-bold">{task.title}</CardTitle>
-          <span className={`px-2 py-1 rounded-full text-xs font-semibold ${statusColors[task.status]}`}>
-            {statusLabels[task.status]}
+          <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusColor(task.status)}`}>
+            {getStatusLabel(task.status)}
           </span>
         </CardHeader>
         <CardContent className="space-y-2">
