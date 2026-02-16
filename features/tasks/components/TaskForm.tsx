@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -33,12 +32,8 @@ import { useTasksStore } from "../store/tasks.store"
 import { useState, useEffect } from "react"
 import { Task } from "../types"
 import { Loader2 } from "lucide-react"
-
-const taskSchema = z.object({
-  title: z.string().min(1, "El título es requerido"),
-  description: z.string(),
-  status: z.enum(["pending", "in-progress", "completed"]),
-})
+import { taskSchema, TaskSchemaType } from "../schemas"
+import { DEFAULT_TASK_VALUES } from "../constants"
 
 export interface TaskFormProps {
   task?: Task
@@ -50,26 +45,18 @@ export function TaskForm({ task, open, onOpenChange }: TaskFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const { addTask, updateTask } = useTasksStore()
 
-  const form = useForm<z.infer<typeof taskSchema>>({
+  const form = useForm<TaskSchemaType>({
     resolver: zodResolver(taskSchema),
-    defaultValues: {
-      title: task?.title || "",
-      description: task?.description || "",
-      status: task?.status || "pending",
-    },
+    defaultValues: task || DEFAULT_TASK_VALUES,
   })
 
   useEffect(() => {
     if (open) {
-      form.reset({
-        title: task?.title || "",
-        description: task?.description || "",
-        status: task?.status || "pending",
-      })
+      form.reset(task || DEFAULT_TASK_VALUES)
     }
   }, [task, open, form])
 
-  async function onSubmit(values: z.infer<typeof taskSchema>) {
+  async function onSubmit(values: TaskSchemaType) {
     setIsLoading(true)
     try {
       if (task) {
